@@ -1,6 +1,6 @@
 import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
-// import OtherModel from './OtherModel';
+import Team from './teamModel';
 
 class Match extends Model {
   id!: number;
@@ -20,7 +20,6 @@ Match.init({
   },
   homeTeam: {
     allowNull: false,
-    foreignKey: true,
     type: INTEGER,
   },
   homeTeamGoals: {
@@ -29,7 +28,6 @@ Match.init({
   },
   awayTeam: {
     allowNull: false,
-    foreignKey: true,
     type: INTEGER,
   },
   awayTeamGoals: {
@@ -45,5 +43,15 @@ Match.init({
   modelName: 'match',
   timestamps: false,
 });
+
+/**
+  * `Workaround` para aplicar as associations em TS: 
+  * Associations 1:N devem ficar em uma das instâncias de modelo
+  * */
+
+Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamhome' });
+Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamaway' });
+
+Team.hasMany(Match, { foreignKey: 'id', as: 'match' });
 
 export default Match;
