@@ -1,0 +1,44 @@
+const { describe } = require('mocha');
+
+describe('Section 1: Users and Login', () => {
+  describe('tests for /login - POST', () => {
+    describe('The login process is successfully done', () => {
+      it('there is a /login route');
+      it('there is a /login POST route');
+      it('login ok and return status http 200');
+      it('login ok and return result json = { "token": "tokenvalue" }');
+      it('after login ok it is redirected to page /matches');
+    });
+    describe('Validate email - success', () => {
+      it('the "email" field is informed');
+      it('the "email" informed is a string');
+      it('the "email" exists in the database');
+    });
+    describe('Validate email - failure', () => {
+      it('the "email" field is not informed - status http 400 and json message "All fields must be filled"');
+      it('the "email" informed is not a string');
+      it('the "email" informed does not exist in the database - status http 401 not authorized - message { "message": "Incorrect email or password" }');
+    });
+    describe('Validate the password - success', () => {
+      it('the "password" field is informed');
+      it('the "password" informed is a string');
+      it('the "password" has more than 6 characters');
+      it('the "password" exists in the databank and is correctly encrypted');
+    });
+    describe('Validate the password - failure', () => {
+      it('the "password" field is not informed - status http 400 with json message { "message": "All fields must be filled" }');
+      it('the "password" informed is not a string');
+      it('the "password" has less than 6 characters');
+      it('the "password" does not exist in the databank - status http 401 not authorized - message { "message": "Incorrect email or password" }');
+      it('the "password" is not correctly encrypted');
+    });
+  });
+    describe('tests for /login/validate - GET', () => {
+      describe('The login validation process is successfully done', () => {
+        it('there is a /login/validate route');
+        it('there is a /login/validate GET route');
+        it('the GET route recieves a header with the authorization parameter');
+        it('the GET route with the coorect authorization parameter in the header, returns the user type as status 200 and a json object = { "role": "admin" }');
+      });
+    });
+  });
