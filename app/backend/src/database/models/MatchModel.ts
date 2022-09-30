@@ -1,6 +1,6 @@
 import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
-import Team from './teamModel';
+import Team from './TeamModel';
 
 class Match extends Model {
   id!: number;
