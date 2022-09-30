@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('matches', {
@@ -7,30 +9,48 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      home_team: {
+      homeTeam: {
         allowNull: false,
         foreignKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'teams',
+          key: 'id',
+        },
+        field: 'home_team',
         type: Sequelize.INTEGER,
       },
-      home_team_goals: {
+      homeTeamGoals: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        field: 'home_team_goals',
       },
-      away_team: {
+      awayTeam: {
         allowNull: false,
         foreignKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'teams',
+          key: 'id',
+        },
+        field: 'away_team',
         type: Sequelize.INTEGER,
       },
-      away_team_goals: {
+      awayTeamGoals: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        field: 'away_team_goals',
       },
-      in_progress: {
+      inProgress: {
         type: Sequelize.BOOLEAN,
+        field: 'in_progress',
       }
     });
   },
-  down: async (queryInterface) => {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('matches');
-  },
+  }
 };
