@@ -1,6 +1,5 @@
 import * as express from 'express';
 import 'express-async-errors';
-import { StatusCodes } from 'http-status-codes';
 import usersRouter from './routes/users.routes';
 
 class App {

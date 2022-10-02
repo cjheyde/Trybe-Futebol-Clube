@@ -3,16 +3,16 @@ import { createToken } from '../helpers/token';
 import IUser from '../interfaces/IUser';
 
 class UserService {
-  constructor(private model = User) { }
+  constructor(private userModel: typeof User) { }
 
-  async login(email: string, password: string): Promise<string> {
+  login(email: string, password: string): string {
     const token = createToken({ email, password });
     return token;
   }
 
   async getByEmail(email: string): Promise<IUser | null> {
-    const result = await this.model.findOne({ where: { email } });
-    return result; 
+    const result = await this.userModel.findOne({ where: { email } });
+    return result as IUser | null; 
   }
 }
 
