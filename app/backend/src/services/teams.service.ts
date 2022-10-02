@@ -8,6 +8,11 @@ class TeamsService {
     const result = await this.teamsModel.findAll();
     return result; 
   }
+
+  async findById(id: number) {
+    const result = await this.teamsModel.findOne({ where: { id } });
+    return result;
+  }
 }
 
 export default TeamsService;
