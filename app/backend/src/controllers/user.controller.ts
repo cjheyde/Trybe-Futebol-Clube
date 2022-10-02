@@ -23,7 +23,10 @@ class UserController {
   }
 
   validateRole (req: Request, res: Response) {
-    const { authorization } = req.headers;
+    const authorization = req.headers;
+    if ( authorization === null || undefined) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'User not authorized' }); 
+    }
     const checkRole = this.userService.validateRole(authorization);
     if (!checkRole) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'User not authorized' });  

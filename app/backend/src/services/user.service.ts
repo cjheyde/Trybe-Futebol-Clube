@@ -1,4 +1,4 @@
-import ILogin from "src/interfaces/ILogin";
+import ILogin from '../interfaces/ILogin';
 import { resourceLimits } from "worker_threads";
 import User from '../database/models/UserModel';
 import { createToken, verifyToken } from '../helpers/token';
@@ -17,7 +17,7 @@ class UserService {
     return result; 
   }
 
-  async validateRole(authorization: string): ILogin {
+  async validateRole(authorization: any): ILogin {
     const result = verifyToken(authorization);
     return result;
   }
