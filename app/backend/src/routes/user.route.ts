@@ -10,4 +10,6 @@ const userController = new UserController(new UserService(User));
 
 userRoute.post('/login', loginValidation, (req, res) => userController.login(req, res));
 
+userRoute.get('/login/validate', (req, res) => userController.validateRole(req, res));
+
 export default userRoute;

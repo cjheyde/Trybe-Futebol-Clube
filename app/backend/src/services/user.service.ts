@@ -1,5 +1,7 @@
+import ILogin from "src/interfaces/ILogin";
+import { resourceLimits } from "worker_threads";
 import User from '../database/models/UserModel';
-import { createToken } from '../helpers/token';
+import { createToken, verifyToken } from '../helpers/token';
 import IUser from '../interfaces/IUser';
 
 class UserService {
@@ -12,7 +14,12 @@ class UserService {
 
   async getByEmail(email: string): Promise<IUser | null> {
     const result = await this.userModel.findOne({ where: { email } });
-    return result as IUser | null; 
+    return result; 
+  }
+
+  async validateRole(authorization: string): ILogin {
+    const result = verifyToken(authorization);
+    return result;
   }
 }
 

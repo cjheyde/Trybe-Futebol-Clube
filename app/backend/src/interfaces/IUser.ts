@@ -1,9 +1,9 @@
 import ILogin from './ILogin';
 
 interface IUser extends ILogin {
-  // id?: number;
+  id?: number;
   username: string;
-  role?: string;
+  // role?: string;
   // email: string;
   // password: string;
 }
