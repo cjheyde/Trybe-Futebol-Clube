@@ -24,6 +24,11 @@ const teamsTest = [
 	},
 ]
 
+const teamIDTest = 	{
+		"id": 2,
+		"teamName": "Bahia"
+	}
+
 describe('route /teams', () => {
   describe('route /teams - GET is successfully done', () => {
     let chaiHttpResponse: Response;
@@ -43,6 +48,26 @@ describe('route /teams', () => {
          .request(app).get('/teams').send();
       chai.expect(response.status).to.equal(200);
       chai.expect(response.json).to.equal(teamsTest);
+    });
+  });
+    describe('route /teams:id - GET is successfully done', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub(Team, "findOne")
+        .resolves(teamIDTest as Team);
+    });
+
+    after(()=>{
+      sinon.restore();
+    });
+
+    it('get successfully the team with id = specified', async () => {
+      chaiHttpResponse = await chai
+         .request(app).get('/teams/2').send();
+      chai.expect(response.status).to.equal(200);
+      chai.expect(response.json).to.equal(teamIDTest);
     });
   });
 });
