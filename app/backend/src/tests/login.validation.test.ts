@@ -7,7 +7,6 @@ import { app } from '../app';
 import User from '../database/models/UserModel';
 
 import { Response } from 'superagent';
-import { response } from "express";
 
 chai.use(chaiHttp);
 
@@ -26,12 +25,7 @@ const loginTest = {
   password: '888888',
 }
 
-const tokenTest = {
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc',
-}
-
-describe('route /login', () => {
-  describe('route /login - POST is successfully done', () => {
+describe('loginValidation tests', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -44,16 +38,13 @@ describe('route /login', () => {
       sinon.restore();
     });
 
-    it('login successfully', async () => {
-      chaiHttpResponse = await chai
-         .request(app).post('/login').send(loginTest);
-      chai.expect(response.status).to.equal(200);
-      chai.expect(response.json).to.equal(tokenTest);
-    });
-
     it('cannot login without email', async () => {
-      const response = await chai.request(app).post('/login').send({ ...loginTest, email: '', });
-      chai.expect(response.status).to.equal(400);
+      chaiHttpResponse = await chai.request(app).post('/login').send({ ...loginTest, email: '', });
+      expect(chaiHttpResponse.status).to.equal(400);
+    });
+    it('cannot login without password', async () => {
+      chaiHttpResponse = await chai.request(app).post('/login').send({ ...loginTest, password: '', });
+      expect(chaiHttpResponse.status).to.equal(400);
     });
   });
-});
+

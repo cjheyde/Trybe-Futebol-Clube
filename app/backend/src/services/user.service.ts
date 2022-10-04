@@ -16,11 +16,6 @@ class UserService {
     const result = await this.userModel.findOne({ where: { email } });
     return result;
   }
-
-  // validateRole(authorization: any): ILogin {
-  //   const result = verifyToken(authorization);
-  //   return result;
-  // }
 }
 
 export default UserService;

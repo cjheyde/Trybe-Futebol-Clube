@@ -25,7 +25,7 @@ class UserController {
   static validateRole(req: Request, res: Response) {
     const { loggedUser } = req.body;
     const { role } = loggedUser;
-    console.log(role);
+    console.log('role do validateRole', role);
 
     return res.status(StatusCodes.OK).json({ role });
   }

@@ -29,7 +29,7 @@ const teamIDTest = 	{
 		"teamName": "Bahia"
 	}
 
-describe('route /teams', () => {
+describe('teamsController tests', () => {
   describe('route /teams - GET is successfully done', () => {
     let chaiHttpResponse: Response;
 
@@ -39,15 +39,23 @@ describe('route /teams', () => {
         .resolves(teamsTest as Team[]);
     });
 
-    after(()=>{
+     after(()=>{
       sinon.restore();
     });
 
-    it('get successfully all teams from database', async () => {
+    it('route /teams - findAll - get successfully all teams from database - status 200', async () => {
       chaiHttpResponse = await chai
-         .request(app).get('/teams').send();
-      chai.expect(response.status).to.equal(200);
-      chai.expect(response.json).to.equal(teamsTest);
+        .request(app).get('/teams').send();
+      expect(chaiHttpResponse.status).to.equal(200);
+    });
+    it('get successfully all teams from database - message ', async () => {
+      before(async () => {
+        sinon
+          .stub(Team, "findAll")
+          .resolves(teamsTest as Team[]);
+      });
+      chaiHttpResponse = await chai.request(app).post('/login').send();
+      expect(chaiHttpResponse.body).to.equals( teamsTest );
     });
   });
     describe('route /teams:id - GET is successfully done', () => {
@@ -63,11 +71,16 @@ describe('route /teams', () => {
       sinon.restore();
     });
 
-    it('get successfully the team with id = specified', async () => {
+    it('get successfully the team with id = specified - status 200', async () => {
       chaiHttpResponse = await chai
          .request(app).get('/teams/2').send();
-      chai.expect(response.status).to.equal(200);
+      expect(chaiHttpResponse.status).to.equal(200);
       chai.expect(response.json).to.equal(teamIDTest);
+    });
+    it('get successfully the team with id = specified - message', async () => {
+      chaiHttpResponse = await chai
+         .request(app).get('/teams/2').send();
+      expect(chaiHttpResponse.body).to.equal(teamIDTest);
     });
   });
 });

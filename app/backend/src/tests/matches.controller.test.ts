@@ -60,7 +60,7 @@ const matchIDTest = 	{
     },
 	}
 
-describe('route /matches', () => {
+describe('matchesController tests', () => {
   describe('route /matches - GET is successfully done', () => {
     let chaiHttpResponse: Response;
 
@@ -74,14 +74,18 @@ describe('route /matches', () => {
       sinon.restore();
     });
 
-    it('get successfully all matches from database', async () => {
+    it('get successfully all matches from database - status 200', async () => {
       chaiHttpResponse = await chai
          .request(app).get('/matches').send();
-      chai.expect(response.status).to.equal(200);
-      chai.expect(response.json).to.equal(matchesTest);
+      expect(chaiHttpResponse.status).to.equal(200);
+    });
+    it('get successfully all matches from database - message', async () => {
+      chaiHttpResponse = await chai
+         .request(app).get('/matches').send();
+      expect(chaiHttpResponse.body).to.equal(matchesTest);
     });
   });
-    describe('route /matches:id - GET is successfully done', () => {
+    describe('route /matches/:id - GET is successfully done', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -94,11 +98,15 @@ describe('route /matches', () => {
       sinon.restore();
     });
 
-    it('get successfully the match with id = specified', async () => {
+    it('/matches/:id - GET - status 200', async () => {
       chaiHttpResponse = await chai
          .request(app).get('/matches/41').send();
-      chai.expect(response.status).to.equal(200);
-      chai.expect(response.json).to.equal(matchIDTest);
+      expect(chaiHttpResponse.status).to.equal(200);
+    });
+    it('/matches/:id - GET - message', async () => {
+      chaiHttpResponse = await chai
+         .request(app).get('/matches/41').send();
+      expect(chaiHttpResponse.body).to.equal(matchIDTest);
     });
   });
 });
