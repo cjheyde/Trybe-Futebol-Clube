@@ -12,15 +12,14 @@ class UserController {
     const { email, password } = req.body;
     const loggedUser: IUser | null = await this.userService.getByEmail(email);
     if (loggedUser === null) {
-      res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
-    } else {
-      const passwordBcrypted = BcryptService.compare(loggedUser.password, password);
-      if (!passwordBcrypted) {
-        res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
-      }
-      const loggedToken = createToken({ email, password });
-      res.status(StatusCodes.OK).json({ token: loggedToken });
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
     }
+    const passwordBcrypted = BcryptService.compare(loggedUser.password, password);
+    if (!passwordBcrypted) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
+    }
+    const loggedToken = createToken({ email, password });
+    return res.status(StatusCodes.OK).json({ token: loggedToken });
   }
 
   static validateRole(req: Request, res: Response) {
