@@ -3,36 +3,36 @@ import { StatusCodes } from 'http-status-codes';
 import IUser from '../interfaces/IUser';
 import UserService from '../services/user.service';
 import BcryptService from '../helpers/BcryptService';
+import { createToken } from '../helpers/token';
 
 class UserController {
   constructor(private userService: UserService) { }
 
-  async login (req: Request, res: Response) {
+  async login(req: Request, res: Response) {
     const { email, password } = req.body;
     const loggedUser: IUser | null = await this.userService.getByEmail(email);
     if (loggedUser === null) {
-      res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' })
+      res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
     } else {
-    const passwordBcrypted = BcryptService.compare(loggedUser.password, password);
-    if (!passwordBcrypted) {
-      res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' })
-    }
-    const token = this.userService.login(email, password);
-    res.status(StatusCodes.OK).json({ token });
+      const passwordBcrypted = BcryptService.compare(loggedUser.password, password);
+      if (!passwordBcrypted) {
+        res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
+      }
+      const loggedToken = createToken({ email, password });
+      res.status(StatusCodes.OK).json({ token: loggedToken });
     }
   }
 
-  validateRole (req: Request, res: Response) {
-    const authorization = req.headers;
-    if ( authorization === null || undefined) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'User not authorized' }); 
-    }
-    const checkRole = this.userService.validateRole(authorization);
-    if (!checkRole) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'User not authorized' });  
-    }
-    return res.status(StatusCodes.OK).json({ role: checkRole }); 
-  }
+  // async validateRole(req: Request, res: Response) {
+  //   const { authorization } = req.headers;
+  //   if (!authorization) {
+  //     return res.status(StatusCodes.BAD_REQUEST).json({ role: 'User Not authorized!' });
+  //   }
+  //   const checkAuthorization = verifyToken(authorization);
+  //   console.log(checkAuthorization);
+
+  //   return res.status(StatusCodes.OK).json({ role });
+  // }
 }
 
 export default UserController;
