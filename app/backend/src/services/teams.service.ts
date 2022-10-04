@@ -6,7 +6,7 @@ class TeamsService {
 
   async findAll(): Promise<ITeam[]> {
     const result = await this.teamsModel.findAll();
-    return result; 
+    return result;
   }
 
   async findById(id: number): Promise<ITeam | null> {

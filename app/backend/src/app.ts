@@ -1,6 +1,7 @@
 import * as express from 'express';
 import 'express-async-errors';
-import erroMiddleware from "./middlewares/error.middleware";
+import erroMiddleware from './middlewares/error.middleware';
+import matchesRoute from './routes/matches.route';
 import teamsRoute from './routes/teams.route';
 import userRoute from './routes/user.route';
 
@@ -29,6 +30,7 @@ class App {
 
     this.app.use('/', userRoute);
     this.app.use('/teams', teamsRoute);
+    this.app.use('/matches', matchesRoute);
 
     this.app.use(erroMiddleware);
   }

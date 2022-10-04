@@ -1,4 +1,4 @@
-import { Router } from 'express'; 
+import { Router } from 'express';
 import Team from '../database/models/TeamModel';
 import TeamsService from '../services/teams.service';
 import TeamsController from '../controllers/teams.controller';

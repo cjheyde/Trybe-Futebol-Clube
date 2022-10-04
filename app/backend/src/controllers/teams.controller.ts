@@ -5,16 +5,16 @@ import TeamsService from '../services/teams.service';
 class TeamsController {
   constructor(private teamsService: TeamsService) { }
 
-  async findAll (req: Request, res: Response) {
+  async findAll(req: Request, res: Response) {
     const getTeams = await this.teamsService.findAll();
-    res.status(StatusCodes.OK).json(getTeams);
-    }
+    return res.status(StatusCodes.OK).json(getTeams);
+  }
 
-  async findById (req: Request, res: Response) {
+  async findById(req: Request, res: Response) {
     const { id } = req.params;
     const getTeam = await this.teamsService.findById(Number(id));
-    res.status(StatusCodes.OK).json(getTeam);
-    }
+    return res.status(StatusCodes.OK).json(getTeam);
   }
+}
 
 export default TeamsController;
