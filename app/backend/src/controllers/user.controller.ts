@@ -23,16 +23,13 @@ class UserController {
     }
   }
 
-  // async validateRole(req: Request, res: Response) {
-  //   const { authorization } = req.headers;
-  //   if (!authorization) {
-  //     return res.status(StatusCodes.BAD_REQUEST).json({ role: 'User Not authorized!' });
-  //   }
-  //   const checkAuthorization = verifyToken(authorization);
-  //   console.log(checkAuthorization);
+  static validateRole(req: Request, res: Response) {
+    const { loggedUser } = req.body;
+    const { role } = loggedUser;
+    console.log(role);
 
-  //   return res.status(StatusCodes.OK).json({ role });
-  // }
+    return res.status(StatusCodes.OK).json({ role });
+  }
 }
 
 export default UserController;
