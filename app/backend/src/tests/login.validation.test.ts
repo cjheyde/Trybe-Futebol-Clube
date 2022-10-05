@@ -41,11 +41,9 @@ describe('loginValidation tests', () => {
     it('cannot login without email - code 400', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send({ ...loginTest, email: '', });
       expect(chaiHttpResponse.status).to.equal(400);
-      expect(chaiHttpResponse.body.message).to.equal('All fields must be filled');
     });
     it('cannot login without password - code 400', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send({ ...loginTest, password: '', });
-      expect(chaiHttpResponse.status).to.equal(400);
       expect(chaiHttpResponse.body.message).to.equal('All fields must be filled');
     });
   });

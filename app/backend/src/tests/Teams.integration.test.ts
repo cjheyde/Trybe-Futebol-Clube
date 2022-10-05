@@ -29,8 +29,8 @@ const teamIDTest = 	{
 		"teamName": "Bahia"
 	}
 
-describe('teamsController tests', () => {
-  describe('route /teams - GET is successfully done', () => {
+describe('Teams Integration tests', () => {
+  describe('/teams - GET is successfully done', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -43,22 +43,23 @@ describe('teamsController tests', () => {
       sinon.restore();
     });
 
-    it('route /teams - findAll - status 200', async () => {
+    it('status 200', async () => {
       chaiHttpResponse = await chai
         .request(app).get('/teams').send();
       expect(chaiHttpResponse.status).to.equal(200);
     });
-    it('route /teams - findAll - content', async () => {
+    it('values received are correct', async () => {
       before(async () => {
         sinon
           .stub(Team, "findAll")
           .resolves(teamsTest as Team[]);
       });
-      chaiHttpResponse = await chai.request(app).get('/login');
-      expect(chaiHttpResponse.body).to.be.an( 'object' );
+      chaiHttpResponse = await chai.request(app).get('/teams');
+      expect(chaiHttpResponse.body).to.be.an( 'array' );
+      expect(chaiHttpResponse.body).to.deep.equal(teamsTest);
     });
   });
-    describe('route /teams:id - GET is successfully done', () => {
+  describe('/teams/:id - GET is successfully done', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -71,17 +72,18 @@ describe('teamsController tests', () => {
       sinon.restore();
     });
 
-    it('get successfully the team with id = specified - status 200', async () => {
+    it('status 200', async () => {
       chaiHttpResponse = await chai
          .request(app).get('/teams/2').send();
       expect(chaiHttpResponse.status).to.equal(200);
     });
-    it('get successfully the team with id = specified - message', async () => {
+    it('values received are correct', async () => {
       chaiHttpResponse = await chai
          .request(app).get('/teams/2').send();
       expect(chaiHttpResponse.body).to.be.an( 'object' );
       expect(chaiHttpResponse.body).to.have.property( 'id' );
       expect(chaiHttpResponse.body).to.have.property( 'teamName' );
+      expect(chaiHttpResponse.body).to.deep.equal(teamIDTest);
     });
   });
 });

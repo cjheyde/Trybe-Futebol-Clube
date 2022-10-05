@@ -35,12 +35,12 @@ const wrongPasswordTest = {
   password: 'kekek',
 };
 
-const tokenTest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc';
+const tokenTest = {
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc'
+};
 
-const authorization = tokenTest;
-
-describe('userController tests', () => {
-  describe('route /login - POST is successfully done', () => {
+describe('Login Integration tests', () => {
+  describe('/login - POST is successfully done', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -53,17 +53,17 @@ describe('userController tests', () => {
       sinon.restore();
     });
 
-    it('can login with correct email and Password - status 200', async () => {
+    it('status 200', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send( loginTest );
       expect(chaiHttpResponse.status).to.equal(200);
     });
-    it('can login with correct email and Password - message { token }', async () => {
+    it('return message { token }', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send( loginTest );
       expect(chaiHttpResponse).to.be.json;
       expect(chaiHttpResponse.body).to.have.property( 'token' );
     });
   });
-    describe('route /login - POST is not possible', () => {
+    describe('/login - POST is not possible', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -76,29 +76,35 @@ describe('userController tests', () => {
       sinon.restore();
     });
 
-    // it('cannot login with a wrong email - status 401', async () => {
+    // it('wrong email - status 401', async () => {
     //   chaiHttpResponse = await chai.request(app).post('/login').send( wrongEmailTest );
     //   expect(chaiHttpResponse.status).to.equal(401);
+    // });
+    // it('Wrong email - message: "Incorrect email or password"', async () => {
+    //   chaiHttpResponse = await chai.request(app).post('/login').send( wrongEmailTest );
     //   expect(chaiHttpResponse.body.message).to.equal( 'Incorrect email or password' );
     // });
-    it('cannot login with a wrong password - status 401', async () => {
+    it('Wrong password - status 401', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send( wrongPasswordTest );
       expect(chaiHttpResponse.status).to.equal(401);
+    });
+    it('Wrong password - message: "Incorrect email or password"', async () => {
+      chaiHttpResponse = await chai.request(app).post('/login').send( wrongPasswordTest );
       expect(chaiHttpResponse.body.message).to.equal( 'Incorrect email or password' );
     });
   });
-  // describe('route /login/validate - GET is successfully done', () => {
+  // describe('/login/validate - GET is successfully done', () => {
   //   let chaiHttpResponse: Response;
 
   //   after(()=>{
   //     sinon.restore();
   //   });
 
-  //   it('login is validated - status 200', async () => {
+  //   it('status 200', async () => {
   //     chaiHttpResponse = await chai.request(app).post('/login/validate').send();
   //     expect(chaiHttpResponse.status).to.equal(200);
   //   });
-  //   it('login is validated  - message { token }', async () => {
+  //   it(' returned { token }', async () => {
   //     chaiHttpResponse = await chai.request(app).post('/login').send();
   //     expect(chaiHttpResponse.body).to.have.property( 'token' );
   //   });
