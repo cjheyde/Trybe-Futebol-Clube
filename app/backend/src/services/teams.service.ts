@@ -1,8 +1,8 @@
 import ITeam from '../interfaces/ITeam';
-import Team from '../database/models/TeamModel';
+import ITeamModel from '../interfaces/ITeamModel';
 
 class TeamsService {
-  constructor(private teamsModel: typeof Team) { }
+  constructor(private teamsModel: ITeamModel) { }
 
   async findAll(): Promise<ITeam[]> {
     const result = await this.teamsModel.findAll();

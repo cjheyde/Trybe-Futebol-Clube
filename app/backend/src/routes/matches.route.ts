@@ -5,7 +5,8 @@ import MatchesController from '../controllers/matches.controller';
 
 const matchesRoute = Router();
 
-const matchesController = new MatchesController(new MatchesService(Match));
+const matchService = new MatchesService(Match);
+const matchesController = new MatchesController(matchService);
 
 matchesRoute.get('/', (req, res) => matchesController.findAll(req, res));
 

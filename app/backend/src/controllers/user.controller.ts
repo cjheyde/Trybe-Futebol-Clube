@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import IUser from '../interfaces/IUser';
 import UserService from '../services/user.service';
 import BcryptService from '../helpers/BcryptService';
 import { createToken } from '../helpers/token';
+import ILogin from '../interfaces/ILogin';
 
 class UserController {
   constructor(private userService: UserService) { }
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
-    const loggedUser: IUser | null = await this.userService.getByEmail(email);
+    const loggedUser: ILogin | null = await this.userService.getByEmail(email);
     if (loggedUser === null) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
     }

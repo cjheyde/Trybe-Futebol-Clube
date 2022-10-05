@@ -1,11 +1,11 @@
 import IMatch from '../interfaces/IMatch';
-import Match from '../database/models/MatchModel';
+import IMatchModel from '../interfaces/IMatchModel';
 import Team from '../database/models/TeamModel';
 
 class MatchesService {
-  constructor(private matchesModel: typeof Match) { }
+  constructor(private matchesModel: IMatchModel) { }
 
-  async findAll() {
+  async findAll(): Promise<IMatch[] | null> {
     const result = await this.matchesModel.findAll({
       include:
       [
@@ -24,10 +24,10 @@ class MatchesService {
     return result;
   }
 
-  async findById(id: number): Promise<IMatch | null> {
-    const result = await this.matchesModel.findOne({ where: { id } });
-    return result;
-  }
+  // async findById(id: number): Promise<IMatch | null> {
+  //   const result = await this.matchesModel.findOne({ where: { id } });
+  //   return result;
+  // }
 }
 
 export default MatchesService;
