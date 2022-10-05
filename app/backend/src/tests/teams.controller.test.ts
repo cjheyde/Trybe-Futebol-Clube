@@ -54,7 +54,7 @@ describe('teamsController tests', () => {
           .stub(Team, "findAll")
           .resolves(teamsTest as Team[]);
       });
-      chaiHttpResponse = await chai.request(app).post('/login').send();
+      chaiHttpResponse = await chai.request(app).get('/login').send();
       expect(chaiHttpResponse.body).to.equals( teamsTest );
     });
   });
