@@ -18,4 +18,10 @@ userRoute.get(
   (req, res) => UserController.validateRole(req, res),
 );
 
+userRoute.post(
+  '/',
+  tokenValidation,
+  (req, res) => UserController.validateRole(req, res),
+);
+
 export default userRoute;

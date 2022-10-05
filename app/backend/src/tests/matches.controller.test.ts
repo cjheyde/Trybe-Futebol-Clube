@@ -79,20 +79,11 @@ describe('matchesController tests', () => {
          .request(app).get('/matches');
       expect(chaiHttpResponse.status).to.equal(200);
     });
-    // it('get successfully all matches from database - message', async () => {
-    //   chaiHttpResponse = await chai
-    //      .request(app).get('/matches');
-    //   chaiHttpResponse.body.forEach((property) => {
-    //   expect(property).to.have.property( 'id' );
-    //   expect(property).to.have.property( 'homeTeam' );
-    //   expect(property).to.have.property( 'homeTeamGoals' );
-    //   expect(property).to.have.property( 'awayTeam' );
-    //   expect(property).to.have.property( 'awayTeamGoals' );
-    //   expect(property).to.have.property( 'inProgress' );
-    //   expect(property).to.have.property( 'teamHome' );
-    //   expect(property).to.have.property( 'teamAway' );
-    //   });
-    // });
+    it('get successfully all matches from database - message', async () => {
+      chaiHttpResponse = await chai
+         .request(app).get('/matches');
+      expect(chaiHttpResponse.body).to.be.an( 'array' );
+    });
   });
   //   describe('route /matches/:id - GET is successfully done', () => {
   //   let chaiHttpResponse: Response;

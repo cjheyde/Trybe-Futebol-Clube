@@ -48,15 +48,15 @@ describe('teamsController tests', () => {
         .request(app).get('/teams').send();
       expect(chaiHttpResponse.status).to.equal(200);
     });
-    // it('route /teams - findAll - content', async () => {
-    //   before(async () => {
-    //     sinon
-    //       .stub(Team, "findAll")
-    //       .resolves(teamsTest as Team[]);
-    //   });
-    //   chaiHttpResponse = await chai.request(app).get('/login');
-    //   expect(chaiHttpResponse.body).to.equals(teamsTest)
-    // });
+    it('route /teams - findAll - content', async () => {
+      before(async () => {
+        sinon
+          .stub(Team, "findAll")
+          .resolves(teamsTest as Team[]);
+      });
+      chaiHttpResponse = await chai.request(app).get('/login');
+      expect(chaiHttpResponse.body).to.be.an( 'object' );
+    });
   });
     describe('route /teams:id - GET is successfully done', () => {
     let chaiHttpResponse: Response;
@@ -79,6 +79,7 @@ describe('teamsController tests', () => {
     it('get successfully the team with id = specified - message', async () => {
       chaiHttpResponse = await chai
          .request(app).get('/teams/2').send();
+      expect(chaiHttpResponse.body).to.be.an( 'object' );
       expect(chaiHttpResponse.body).to.have.property( 'id' );
       expect(chaiHttpResponse.body).to.have.property( 'teamName' );
     });

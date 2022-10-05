@@ -29,9 +29,5 @@ describe('errorMiddleware tests', () => {
       chaiHttpResponse = await chai.request(app).get('/tests').send();
       expect(chaiHttpResponse.status).to.equal(404);
     });
-    // it('cannot find /tests GET - message - Not Found', async () => {
-    //   chaiHttpResponse = await chai.request(app).get('/tests').send();
-    //   expect(chaiHttpResponse.body).to.have.property( 'message' );
-    // });
   });
 

@@ -29,9 +29,10 @@ describe('tokenValidation tests', () => {
       chaiHttpResponse = await chai.request(app).get('/login/validate').send();
       expect(chaiHttpResponse.status).to.equal(401);
     });
-    it('cannot validate token - message "token not valid"', async () => {
+    it('cannot validate token - message "Token not valid"', async () => {
       chaiHttpResponse = await chai.request(app).get('/login/validate').send();
       expect(chaiHttpResponse.body).to.have. property( 'message' );
+      expect(chaiHttpResponse.body.message).to.equal( 'Token not valid' );
     });
   });
 
