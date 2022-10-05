@@ -5,7 +5,8 @@ import TeamsController from '../controllers/teams.controller';
 
 const teamsRoute = Router();
 
-const teamsController = new TeamsController(new TeamsService(Team));
+const teamsService = new TeamsService(Team);
+const teamsController = new TeamsController(teamsService);
 
 teamsRoute.get('/', (req, res) => teamsController.findAll(req, res));
 

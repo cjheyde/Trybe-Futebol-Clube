@@ -1,9 +1,11 @@
 import IMatch from '../interfaces/IMatch';
-import IMatchModel from '../interfaces/IMatchModel';
+// import IMatchModel from '../interfaces/IMatchModel';
 import Team from '../database/models/TeamModel';
+import Match from '../database/models/MatchModel';
 
 class MatchesService {
-  constructor(private matchesModel: IMatchModel) { }
+  // constructor(private matchesModel: IMatchModel) { }
+  constructor(private matchesModel: typeof Match) {}
 
   async findAll(): Promise<IMatch[] | null> {
     const result = await this.matchesModel.findAll({

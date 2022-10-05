@@ -10,11 +10,11 @@ class MatchesController {
     return res.status(StatusCodes.OK).json(getMatches);
   }
 
-  async findById(req: Request, res: Response) {
-    const { id } = req.params;
-    const getMatch = await this.matchesService.findById(Number(id));
-    return res.status(StatusCodes.OK).json(getMatch);
-  }
+  // async findById(req: Request, res: Response) {
+  //   const { id } = req.params;
+  //   const getMatch = await this.matchesService.findById(Number(id));
+  //   return res.status(StatusCodes.OK).json(getMatch);
+  // }
 }
 
 export default MatchesController;
