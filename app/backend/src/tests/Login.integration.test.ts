@@ -26,7 +26,7 @@ const loginTest = {
 };
 
 const wrongEmailTest = {
-  email: 'teste.com',
+  email: 't@t.com',
   password: 'secret_admin',
 };
 
@@ -38,6 +38,10 @@ const wrongPasswordTest = {
 const tokenTest = {
   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc'
 };
+
+const authorization = {
+  authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc'
+}
 
 describe('Login Integration tests', () => {
   describe('/login - POST is successfully done', () => {
@@ -76,6 +80,14 @@ describe('Login Integration tests', () => {
       sinon.restore();
     });
 
+    it('cannot login without email - code 400', async () => {
+      chaiHttpResponse = await chai.request(app).post('/login').send({ ...loginTest, email: '', });
+      expect(chaiHttpResponse.status).to.equal(400);
+    });
+    it('cannot login without password - code 400', async () => {
+      chaiHttpResponse = await chai.request(app).post('/login').send({ ...loginTest, password: '', });
+      expect(chaiHttpResponse.body.message).to.equal('All fields must be filled');
+    });
     // it('wrong email - status 401', async () => {
     //   chaiHttpResponse = await chai.request(app).post('/login').send( wrongEmailTest );
     //   expect(chaiHttpResponse.status).to.equal(401);
@@ -93,20 +105,4 @@ describe('Login Integration tests', () => {
       expect(chaiHttpResponse.body.message).to.equal( 'Incorrect email or password' );
     });
   });
-  // describe('/login/validate - GET is successfully done', () => {
-  //   let chaiHttpResponse: Response;
-
-  //   after(()=>{
-  //     sinon.restore();
-  //   });
-
-  //   it('status 200', async () => {
-  //     chaiHttpResponse = await chai.request(app).post('/login/validate').send();
-  //     expect(chaiHttpResponse.status).to.equal(200);
-  //   });
-  //   it(' returned { token }', async () => {
-  //     chaiHttpResponse = await chai.request(app).post('/login').send();
-  //     expect(chaiHttpResponse.body).to.have.property( 'token' );
-  //   });
-  // });
 });

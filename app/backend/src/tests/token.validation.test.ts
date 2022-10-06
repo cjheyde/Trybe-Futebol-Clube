@@ -25,14 +25,14 @@ describe('tokenValidation tests', () => {
       sinon.restore();
     });
 
-    it('cannot validate token - status 401', async () => {
+    it('cannot validate token - status 400', async () => {
       chaiHttpResponse = await chai.request(app).get('/login/validate').send();
-      expect(chaiHttpResponse.status).to.equal(401);
+      expect(chaiHttpResponse.status).to.equal(400);
     });
-    it('cannot validate token - message "Token not valid"', async () => {
+    it('cannot validate token - message "A Token needs to be informed"', async () => {
       chaiHttpResponse = await chai.request(app).get('/login/validate').send();
       expect(chaiHttpResponse.body).to.have. property( 'message' );
-      expect(chaiHttpResponse.body.message).to.equal( 'Token not valid' );
+      expect(chaiHttpResponse.body.message).to.equal( 'A Token needs to be informed' );
     });
   });
 
