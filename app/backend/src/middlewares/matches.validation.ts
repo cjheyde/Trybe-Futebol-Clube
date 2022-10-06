@@ -10,7 +10,6 @@ const matchesValidation: RequestHandler = (req, res, next) => {
     return res.status(StatusCodes.UNAUTHORIZED)
       .json({ message: 'It is not possible to create a match with two equal teams' });
   }
-
   next();
 };
 

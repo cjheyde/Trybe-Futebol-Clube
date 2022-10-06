@@ -12,6 +12,13 @@ class MatchesController {
 
   async create(req: Request, res: Response) {
     const newMatch = req.body;
+    const { homeTeam, awayTeam } = newMatch;
+
+    const checkHomeTeam = await this.matchesService.findOne(homeTeam);
+    const checkAwayTeam = await this.matchesService.findOne(awayTeam);
+    if (!checkHomeTeam || !checkAwayTeam) {
+      return res.status(StatusCodes.NOT_FOUND).json({ message: 'There is no team with such id!' });
+    }
     const createNewMatch = await this.matchesService.create(newMatch);
     return res.status(201).json(createNewMatch);
   }
