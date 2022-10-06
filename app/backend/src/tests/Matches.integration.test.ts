@@ -143,28 +143,29 @@ describe('Matches Integration tests', () => {
       expect(chaiHttpResponse.body).to.deep.equal(matchesPostResult);
     });
   });
-  //   describe('/matches/:id - GET is successfully done', () => {
-  //   let chaiHttpResponse: Response;
+    describe('/matches/:id/finish - PATCH is successfully done', () => {
+    let chaiHttpResponse: Response;
 
-  //   before(async () => {
-  //     sinon
-  //       .stub(Match, "findOne")
-  //       .resolves(matchIDTest as any);
-  //   });
+    before(async () => {
+      sinon
+        .stub(Match, "update")
+        .resolves();
+    });
 
-  //   after(()=>{
-  //     sinon.restore();
-  //   });
+    after(()=>{
+      sinon.restore();
+    });
 
-  //   it('status 200', async () => {
-  //     chaiHttpResponse = await chai
-  //        .request(app).get('/matches/41').send();
-  //     expect(chaiHttpResponse.status).to.equal(200);
-  //   });
-  //   it('values received are ok', async () => {
-  //     chaiHttpResponse = await chai
-  //        .request(app).get('/matches/41').send();
-  //     expect(chaiHttpResponse.body).to.deep.equal(matchIDTest);
-  //   });
-  // });
+    it('status 200', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .patch('/matches/41/finish')
+        .set(authorizationValid)
+        .send();
+      expect(chaiHttpResponse.status).to.equal(200);
+      expect(chaiHttpResponse.body).to.be.an( 'object' );
+      expect(chaiHttpResponse.body).to.have.property( 'message' );
+      expect(chaiHttpResponse.body.message).to.equal('Finished');
+    });
+  });
 });
