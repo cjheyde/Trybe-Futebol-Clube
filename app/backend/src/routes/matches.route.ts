@@ -22,7 +22,11 @@ matchesRoute.post(
   (req, res) => matchesController.create(req, res),
 );
 
-// matchesRoute.patch('/:id', (req, res) => matchesController.findById(req, res));
+matchesRoute.patch(
+  '/:id',
+  tokenValidation,
+  (req, res) => matchesController.updateInProgress(req, res),
+);
 
 matchesRoute.patch(
   '/:id/finish',

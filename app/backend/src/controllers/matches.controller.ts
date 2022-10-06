@@ -30,6 +30,16 @@ class MatchesController {
 
     return res.status(200).json({ message: 'Finished' });
   }
+
+  async updateInProgress(req: Request, res: Response) {
+    const { id } = req.params;
+    const newData = req.body;
+    const inProgress = true;
+
+    await this.matchesService.updateInProgress(Number(id), inProgress, newData);
+
+    return res.status(200).json({ message: 'Match scores updated!' });
+  }
 }
 
 export default MatchesController;
