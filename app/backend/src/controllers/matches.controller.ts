@@ -10,6 +10,12 @@ class MatchesController {
     return res.status(StatusCodes.OK).json(getMatches);
   }
 
+  async create(req: Request, res: Response) {
+    const newMatch = req.body;
+    const createNewMatch = await this.matchesService.create(newMatch);
+    return res.status(201).json(createNewMatch);
+  }
+
   // async findById(req: Request, res: Response) {
   //   const { id } = req.params;
   //   const getMatch = await this.matchesService.findById(Number(id));

@@ -28,7 +28,6 @@ class UserController {
     const { email } = payload;
 
     const loggedUser = await this.userService.getByEmail(email);
-    console.log('role do validateRole', payload.email);
 
     const role = loggedUser?.role;
 

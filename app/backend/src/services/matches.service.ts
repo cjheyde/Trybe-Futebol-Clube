@@ -1,10 +1,8 @@
 import IMatch from '../interfaces/IMatch';
-// import IMatchModel from '../interfaces/IMatchModel';
 import Team from '../database/models/TeamModel';
 import Match from '../database/models/MatchModel';
 
 class MatchesService {
-  // constructor(private matchesModel: IMatchModel) { }
   constructor(private matchesModel: typeof Match) {}
 
   async findAll(): Promise<IMatch[] | null> {
@@ -24,6 +22,11 @@ class MatchesService {
       ],
     });
     return result as IMatch[] | null;
+  }
+
+  async create(newMatch: IMatch): Promise<IMatch> {
+    const result = await this.matchesModel.create(newMatch);
+    return result as IMatch;
   }
 
   // async findById(id: number): Promise<IMatch | null> {
