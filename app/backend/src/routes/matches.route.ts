@@ -10,7 +10,10 @@ const matchesRoute = Router();
 const matchesService = new MatchesService(Match);
 const matchesController = new MatchesController(matchesService);
 
-matchesRoute.get('/', (req, res) => matchesController.findAll(req, res));
+matchesRoute.get(
+  '/',
+  (req, res) => matchesController.findAll(req, res),
+);
 
 matchesRoute.post(
   '/',
@@ -21,6 +24,10 @@ matchesRoute.post(
 
 // matchesRoute.patch('/:id', (req, res) => matchesController.findById(req, res));
 
-// matchesRoute.patch('/:id/finish', (req, res) => matchesController.findById(req, res));
+matchesRoute.patch(
+  '/:id/finish',
+  tokenValidation,
+  (req, res) => matchesController.updateFinished(req, res),
+);
 
 export default matchesRoute;

@@ -29,6 +29,11 @@ class MatchesService {
     return result as IMatch;
   }
 
+  async updateFinished(id: number, inProgress: boolean): Promise<unknown> {
+    const result = await this.matchesModel.update({ inProgress }, { where: { id } });
+    return result;
+  }
+
   // async findById(id: number): Promise<IMatch | null> {
   //   const result = await this.matchesModel.findOne({ where: { id } });
   //   return result;

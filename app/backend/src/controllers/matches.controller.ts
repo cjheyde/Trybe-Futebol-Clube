@@ -16,11 +16,13 @@ class MatchesController {
     return res.status(201).json(createNewMatch);
   }
 
-  // async findById(req: Request, res: Response) {
-  //   const { id } = req.params;
-  //   const getMatch = await this.matchesService.findById(Number(id));
-  //   return res.status(StatusCodes.OK).json(getMatch);
-  // }
+  async updateFinished(req: Request, res: Response) {
+    const { id } = req.params;
+    const inProgress = false;
+    await this.matchesService.updateFinished(Number(id), inProgress);
+
+    return res.status(200).json({ message: 'Finished' });
+  }
 }
 
 export default MatchesController;
