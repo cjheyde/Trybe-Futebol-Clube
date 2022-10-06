@@ -1,12 +1,12 @@
-import ILogin from '../interfaces/ILogin';
 import User from '../database/models/UserModel';
+import IUser from '../interfaces/IUser';
 
 class UserService {
   constructor(private userModel: typeof User) { }
 
-  async getByEmail(email: string): Promise<ILogin | null> {
+  async getByEmail(email: string): Promise<IUser | null> {
     const result = await this.userModel.findOne({ where: { email } });
-    return result as ILogin;
+    return result as IUser;
   }
 }
 

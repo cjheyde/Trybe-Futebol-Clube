@@ -15,13 +15,7 @@ userRoute.post('/login', loginValidation, (req, res) => userController.login(req
 userRoute.get(
   '/login/validate',
   tokenValidation,
-  (req, res) => UserController.validateRole(req, res),
-);
-
-userRoute.post(
-  '/',
-  tokenValidation,
-  (req, res) => UserController.validateRole(req, res),
+  (req, res) => userController.validateRole(req, res),
 );
 
 export default userRoute;

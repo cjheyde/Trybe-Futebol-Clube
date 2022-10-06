@@ -3,14 +3,14 @@ import { StatusCodes } from 'http-status-codes';
 import UserService from '../services/user.service';
 import BcryptService from '../helpers/BcryptService';
 import { createToken } from '../helpers/token';
-import ILogin from '../interfaces/ILogin';
+import IUser from '../interfaces/IUser';
 
 class UserController {
   constructor(private userService: UserService) { }
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
-    const loggedUser: ILogin | null = await this.userService.getByEmail(email);
+    const loggedUser: IUser | null = await this.userService.getByEmail(email);
     if (loggedUser === null) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Incorrect email or password' });
     }
@@ -22,12 +22,17 @@ class UserController {
     return res.status(StatusCodes.OK).json({ token: loggedToken });
   }
 
-  static validateRole(req: Request, res: Response) {
+  async validateRole(req: Request, res: Response) {
     const { user } = req.body;
+    const { payload } = user;
+    const { email } = payload;
 
-    console.log('role do validateRole', user.role);
+    const loggedUser = await this.userService.getByEmail(email);
+    console.log('role do validateRole', payload.email);
 
-    return res.status(StatusCodes.OK).json({ role: user.role });
+    const role = loggedUser?.role;
+
+    return res.status(StatusCodes.OK).json({ role });
   }
 }
 
