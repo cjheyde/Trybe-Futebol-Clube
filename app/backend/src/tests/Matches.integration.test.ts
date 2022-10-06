@@ -45,7 +45,7 @@ const matchesTest = [
   },
 ]
 
-const matchIDTest = 	{
+const matchIDTest = {
     "id": 41,
     "homeTeam": 16,
     "homeTeamGoals": 2,
@@ -59,6 +59,31 @@ const matchIDTest = 	{
       "teamName": "Internacional"
     },
 	}
+
+  const matchesPost = {
+  "homeTeam": 16,
+  "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true 
+}
+
+  const matchesPostResult = {
+  "id": 3,
+  "homeTeam": 16,
+  "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true 
+}
+
+  const authorizationValid = {
+    authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9.XrQ12-O_jYIpGZPBrqo89ovNDI00KCLq4akcUHeqH-c"
+  }
+
+  const authorizationInvalid = {
+    authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9"
+  }
 
 describe('Matches Integration tests', () => {
   describe('/matches - GET is successfully done', () => {
@@ -84,6 +109,38 @@ describe('Matches Integration tests', () => {
          .request(app).get('/matches');
       expect(chaiHttpResponse.body).to.be.an( 'array' );
       expect(chaiHttpResponse.body).to.deep.equal(matchesTest);
+    });
+  });
+  describe('/matches - POST is successfully done', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub(Match, "create")
+        .resolves(matchesPostResult as Match);
+    });
+
+    after(()=>{
+      sinon.restore();
+    });
+
+    it('status 201', async () => {
+      chaiHttpResponse = await chai
+         .request(app)
+         .post('/matches')
+         .set(authorizationValid)
+         .send(matchesPost);
+      expect(chaiHttpResponse.status).to.equal(201);
+    });
+    it('database values coorect', async () => {
+      chaiHttpResponse = await chai
+         .request(app)
+         .post('/matches')
+         .set(authorizationValid)
+         .send(matchesPost);
+      expect(chaiHttpResponse.body).to.be.an( 'object' );
+      expect(chaiHttpResponse.body).to.have.property( 'inProgress' );
+      expect(chaiHttpResponse.body).to.deep.equal(matchesPostResult);
     });
   });
   //   describe('/matches/:id - GET is successfully done', () => {
