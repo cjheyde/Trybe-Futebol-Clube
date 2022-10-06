@@ -23,11 +23,11 @@ class UserController {
   }
 
   static validateRole(req: Request, res: Response) {
-    const { loggedUser } = req.body;
-    const { role } = loggedUser;
-    console.log('role do validateRole', role);
+    const { user } = req.body;
 
-    return res.status(StatusCodes.OK).json({ role });
+    console.log('role do validateRole', user.role);
+
+    return res.status(StatusCodes.OK).json({ role: user.role });
   }
 }
 

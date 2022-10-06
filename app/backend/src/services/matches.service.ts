@@ -23,7 +23,7 @@ class MatchesService {
         },
       ],
     });
-    return result;
+    return result as IMatch[] | null;
   }
 
   // async findById(id: number): Promise<IMatch | null> {
