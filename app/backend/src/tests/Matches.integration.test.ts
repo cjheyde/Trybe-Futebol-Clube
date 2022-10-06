@@ -100,6 +100,14 @@ const matchesPostSameTeams = {
   "inProgress": true
 }
 
+const matchesPostInexistingTeam = {
+  "homeTeam": 800,
+  "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true
+}
+
 describe('Matches Integration tests', () => {
   describe('/matches - GET is successfully done', () => {
     let chaiHttpResponse: Response;
@@ -206,6 +214,15 @@ describe('Matches Integration tests', () => {
         .send(matchesPostSameTeams);
       expect(chaiHttpResponse.status).to.equal(401);
       expect(chaiHttpResponse.body.message).to.equal('It is not possible to create a match with two equal teams');
+    });
+    it('informed teams are not in database - status 404 & There is no team with such id!', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set(authorizationValid)
+        .send(matchesPostInexistingTeam);
+      expect(chaiHttpResponse.status).to.equal(404);
+      expect(chaiHttpResponse.body.message).to.equal('There is no team with such id!');
     });
   });
   describe('/matches/:id/finish - PATCH is successfully done', () => {
