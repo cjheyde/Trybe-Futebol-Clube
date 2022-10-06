@@ -46,44 +46,59 @@ const matchesTest = [
 ]
 
 const matchIDTest = {
-    "id": 41,
-    "homeTeam": 16,
-    "homeTeamGoals": 2,
-    "awayTeam": 9,
-    "awayTeamGoals": 0,
-    "inProgress": true,
-    "teamHome": {
-      "teamName": "São Paulo"
-    },
-    "teamAway": {
-      "teamName": "Internacional"
-    },
-	}
+  "id": 41,
+  "homeTeam": 16,
+  "homeTeamGoals": 2,
+  "awayTeam": 9,
+  "awayTeamGoals": 0,
+  "inProgress": true,
+  "teamHome": {
+    "teamName": "São Paulo"
+  },
+  "teamAway": {
+    "teamName": "Internacional"
+  },
+}
 
-  const matchesPost = {
+const matchesPost = {
   "homeTeam": 16,
   "awayTeam": 8,
   "homeTeamGoals": 2,
   "awayTeamGoals": 2,
-  "inProgress": true 
+  "inProgress": true
 }
 
-  const matchesPostResult = {
+const matchesPostResult = {
   "id": 3,
   "homeTeam": 16,
   "awayTeam": 8,
   "homeTeamGoals": 2,
   "awayTeamGoals": 2,
-  "inProgress": true 
+  "inProgress": true
 }
 
-  const authorizationValid = {
-    authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9.XrQ12-O_jYIpGZPBrqo89ovNDI00KCLq4akcUHeqH-c"
-  }
+const authorizationValid = {
+  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9.XrQ12-O_jYIpGZPBrqo89ovNDI00KCLq4akcUHeqH-c"
+}
 
-  const authorizationInvalid = {
-    authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9"
-  }
+const authorizationInvalid = {
+  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9"
+}
+
+const matchesPostMissing = {
+  "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true
+}
+
+const matchesPostSameTeams = {
+  "homeTeam": 8,
+  "awayTeam": 8,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true
+}
 
 describe('Matches Integration tests', () => {
   describe('/matches - GET is successfully done', () => {
@@ -95,19 +110,19 @@ describe('Matches Integration tests', () => {
         .resolves(matchesTest as []);
     });
 
-    after(()=>{
+    after(() => {
       sinon.restore();
     });
 
     it('status 200', async () => {
       chaiHttpResponse = await chai
-         .request(app).get('/matches');
+        .request(app).get('/matches');
       expect(chaiHttpResponse.status).to.equal(200);
     });
     it('database values coorect', async () => {
       chaiHttpResponse = await chai
-         .request(app).get('/matches');
-      expect(chaiHttpResponse.body).to.be.an( 'array' );
+        .request(app).get('/matches');
+      expect(chaiHttpResponse.body).to.be.an('array');
       expect(chaiHttpResponse.body).to.deep.equal(matchesTest);
     });
   });
@@ -120,30 +135,80 @@ describe('Matches Integration tests', () => {
         .resolves(matchesPostResult as Match);
     });
 
-    after(()=>{
+    after(() => {
       sinon.restore();
     });
 
     it('status 201', async () => {
       chaiHttpResponse = await chai
-         .request(app)
-         .post('/matches')
-         .set(authorizationValid)
-         .send(matchesPost);
+        .request(app)
+        .post('/matches')
+        .set(authorizationValid)
+        .send(matchesPost);
       expect(chaiHttpResponse.status).to.equal(201);
     });
-    it('database values coorect', async () => {
+    it('database values correct', async () => {
       chaiHttpResponse = await chai
-         .request(app)
-         .post('/matches')
-         .set(authorizationValid)
-         .send(matchesPost);
-      expect(chaiHttpResponse.body).to.be.an( 'object' );
-      expect(chaiHttpResponse.body).to.have.property( 'inProgress' );
+        .request(app)
+        .post('/matches')
+        .set(authorizationValid)
+        .send(matchesPost);
+      expect(chaiHttpResponse.body).to.be.an('object');
+      expect(chaiHttpResponse.body).to.have.property('inProgress');
       expect(chaiHttpResponse.body).to.deep.equal(matchesPostResult);
     });
   });
-    describe('/matches/:id/finish - PATCH is successfully done', () => {
+  describe('/matches - POST is not possible', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub(Match, "create")
+        .resolves();
+    });
+
+    after(() => {
+      sinon.restore();
+    });
+
+    it('No token informed - status 401 & Token not found', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set({})
+        .send(matchesPost);
+      expect(chaiHttpResponse.status).to.equal(401);
+      expect(chaiHttpResponse.body.message).to.equal('Token not found');
+    });
+    it('Not valid token - status 401 & Token must be a valid token', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set(authorizationInvalid)
+        .send(matchesPost);
+      expect(chaiHttpResponse.status).to.equal(401);
+      expect(chaiHttpResponse.body.message).to.equal('Token must be a valid token');
+    });
+    it('missing information in the body - status 400 & All fields must be filled', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set(authorizationValid)
+        .send(matchesPostMissing);
+      expect(chaiHttpResponse.status).to.equal(400);
+      expect(chaiHttpResponse.body.message).to.equal('All fields must be filled');
+    });
+    it('informed homeTeam = awayTeam - status 401 & It is not possible to create a match with two equal teams', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .post('/matches')
+        .set(authorizationValid)
+        .send(matchesPostSameTeams);
+      expect(chaiHttpResponse.status).to.equal(401);
+      expect(chaiHttpResponse.body.message).to.equal('It is not possible to create a match with two equal teams');
+    });
+  });
+  describe('/matches/:id/finish - PATCH is successfully done', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
@@ -152,7 +217,7 @@ describe('Matches Integration tests', () => {
         .resolves();
     });
 
-    after(()=>{
+    after(() => {
       sinon.restore();
     });
 
@@ -163,8 +228,8 @@ describe('Matches Integration tests', () => {
         .set(authorizationValid)
         .send();
       expect(chaiHttpResponse.status).to.equal(200);
-      expect(chaiHttpResponse.body).to.be.an( 'object' );
-      expect(chaiHttpResponse.body).to.have.property( 'message' );
+      expect(chaiHttpResponse.body).to.be.an('object');
+      expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body.message).to.equal('Finished');
     });
   });

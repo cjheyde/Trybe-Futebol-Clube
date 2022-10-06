@@ -6,7 +6,7 @@ const tokenValidation: RequestHandler = (req, res, next) => {
   const { authorization } = req.headers;
   try {
     if (!authorization) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'token not found' });
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not found' });
     }
     const dataToken = verifyToken(authorization);
 
@@ -14,7 +14,7 @@ const tokenValidation: RequestHandler = (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Token must be a valid token' });
+    res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token must be a valid token' });
   }
 };
 
