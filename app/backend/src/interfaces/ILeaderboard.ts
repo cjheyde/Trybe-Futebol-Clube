@@ -1,5 +1,5 @@
 interface ILeaderboard {
-  // nome do time
+  id?: number,
   name: string,
   totalPoints: number,
   totalGames: number,
