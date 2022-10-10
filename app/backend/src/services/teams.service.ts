@@ -2,7 +2,6 @@ import Team from '../database/models/TeamModel';
 import ITeam from '../interfaces/ITeam';
 
 class TeamsService {
-  static findById: any;
   constructor(private teamsModel: typeof Team) { }
 
   async findAll(): Promise<ITeam[]> {
