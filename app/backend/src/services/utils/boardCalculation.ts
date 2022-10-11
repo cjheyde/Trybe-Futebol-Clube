@@ -16,9 +16,24 @@ class BoardCalculation {
     efficiency: 0,
   };
 
+  resetBoard() {
+    this.board.name = '';
+    this.board.totalPoints = 0;
+    this.board.totalGames = 0;
+    this.board.totalVictories = 0;
+    this.board.totalDraws = 0;
+    this.board.totalLosses = 0;
+    this.board.goalsFavor = 0;
+    this.board.goalsOwn = 0;
+    this.board.goalsBalance = 0;
+    this.board.efficiency = 0;
+  }
+
   async getBoard(allTeams: ITeam[], allFinishedMatches: IMatch[]) {
     const finalBoard: ILeaderboard[] = allTeams.map((team: ITeam) => {
+      this.resetBoard();
       this.board.name = team.teamName;
+
       allFinishedMatches.forEach((match: IMatch) => {
         if (team.id === match.homeTeam) {
           this.homeBoardCalculation(match);
@@ -30,15 +45,17 @@ class BoardCalculation {
   }
 
   homeBoardCalculation(match: IMatch) {
-    this.board.totalGames += 1;
-    this.board.totalVictories = 0;
-    this.board.totalDraws = 0;
-    this.board.totalLosses = 0;
+    this.board.totalVictories += match.homeTeamGoals > match.awayTeamGoals ? 1 : 0;
+    this.board.totalDraws += match.homeTeamGoals === match.awayTeamGoals ? 1 : 0;
+    this.board.totalLosses += match.homeTeamGoals < match.awayTeamGoals ? 1 : 0;
     this.board.totalPoints = (this.board.totalVictories * 3) + this.board.totalDraws;
+    this.board.totalGames += 1;
     this.board.goalsFavor += match.homeTeamGoals;
     this.board.goalsOwn += match.awayTeamGoals;
     this.board.goalsBalance = this.board.goalsFavor - this.board.goalsOwn;
-    this.board.efficiency = 0;
+    this.board.efficiency = Number(
+      ((this.board.totalPoints / (this.board.totalGames * 3)) * 100).toFixed(2),
+    );
   }
 }
 
