@@ -6,7 +6,7 @@ class TeamsService {
 
   async findAll() {
     const result = await this.teamsModel.findAll();
-    return result as ITeam[];
+    return result;
   }
 
   async findById(id: number) {

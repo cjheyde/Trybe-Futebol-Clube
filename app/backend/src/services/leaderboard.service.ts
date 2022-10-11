@@ -1,18 +1,19 @@
-import Leaderboard from '../database/models/LeaderboardModel';
-import ILeaderboard from '../interfaces/ILeaderboard';
-// import TeamsService from './teams.service';
-// import ITeam from '../interfaces/ITeam';
-// import Team from '../database/models/TeamModel';
+import Match from '../database/models/MatchModel';
+import Team from '../database/models/TeamModel';
+import BoardCalculation from './utils/boardCalculation';
 
 class LeaderboardService {
+  private calc = new BoardCalculation();
   constructor(
-    // private teamsModel: typeof Team,
-    private leaderboardModel: typeof Leaderboard,
+    private teamsModel: typeof Team,
+    private matchesModel: typeof Match,
   ) { }
 
-  async findAll(): Promise<ILeaderboard[] | null> {
-    const result = await this.leaderboardModel.findAll();
-    return result as ILeaderboard[];
+  async getHomeLeaderboard() {
+    const allTeams = await this.teamsModel.findAll();
+    const allFinishedMatches = await this.matchesModel.findAll({ where: { inProgress: false } });
+    const boardData = this.calc.getBoard(allTeams, allFinishedMatches);
+    return boardData;
   }
 }
 

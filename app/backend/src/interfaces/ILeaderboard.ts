@@ -1,18 +1,13 @@
 interface ILeaderboard {
-  id?: number,
   name: string,
   totalPoints: number,
   totalGames: number,
-  totalVictories?: number,
-  // total de empates
-  totalDraws?: number,
-  totalLosses?: number,
-  goalsFavor?: number,
-  // gols sofridos
-  goalsOwn?: number,
-  // saldo de gols
+  totalVictories: number,
+  totalDraws: number,
+  totalLosses: number,
+  goalsFavor: number,
+  goalsOwn: number,
   goalsBalance: number,
-  // aproveitamento do time
   efficiency: number,
 }
 

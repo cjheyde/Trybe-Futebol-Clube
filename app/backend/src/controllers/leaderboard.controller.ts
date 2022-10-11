@@ -5,9 +5,9 @@ import LeaderboardService from '../services/leaderboard.service';
 class LeaderboardController {
   constructor(private leaderboardService: LeaderboardService) { }
 
-  async findAll(req: Request, res: Response) {
-    const homeTable = await this.leaderboardService.findAll();
-    return res.status(StatusCodes.OK).json(homeTable);
+  async getHomeLeaderboard(req: Request, res: Response) {
+    const boardData = await this.leaderboardService.getHomeLeaderboard();
+    return res.status(StatusCodes.OK).json(boardData);
   }
 }
 
