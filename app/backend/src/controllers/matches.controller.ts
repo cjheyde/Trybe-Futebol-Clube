@@ -26,8 +26,8 @@ class MatchesController {
   async updateFinished(req: Request, res: Response) {
     const { id } = req.params;
     const inProgress = false;
-    await this.matchesService.updateFinished(Number(id), inProgress);
-
+    const matchFinished = await this.matchesService.updateFinished(Number(id), inProgress);
+    req.body.match = matchFinished;
     return res.status(200).json({ message: 'Finished' });
   }
 

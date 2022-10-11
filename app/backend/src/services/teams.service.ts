@@ -4,12 +4,12 @@ import ITeam from '../interfaces/ITeam';
 class TeamsService {
   constructor(private teamsModel: typeof Team) { }
 
-  async findAll(): Promise<ITeam[]> {
+  async findAll() {
     const result = await this.teamsModel.findAll();
     return result as ITeam[];
   }
 
-  async findById(id: number): Promise<ITeam | null> {
+  async findById(id: number) {
     const result = await this.teamsModel.findOne({ where: { id } });
     return result as ITeam | null;
   }

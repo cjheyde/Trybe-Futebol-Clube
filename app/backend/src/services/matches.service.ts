@@ -8,7 +8,7 @@ class MatchesService {
     private matchesModel: typeof Match,
   ) { }
 
-  async findAll(): Promise<IMatch[] | null> {
+  async findAll() {
     const result = await this.matchesModel.findAll({
       include:
         [
@@ -24,29 +24,34 @@ class MatchesService {
           },
         ],
     });
-    return result as IMatch[] | null;
+    return result;
   }
 
-  async create(newMatch: IMatch): Promise<IMatch> {
+  async create(newMatch: IMatch) {
     const result = await this.matchesModel.create(newMatch);
     return result as IMatch;
   }
 
-  async updateFinished(id: number, inProgress: boolean): Promise<unknown> {
-    const result = await this.matchesModel.update({ inProgress }, { where: { id } });
+  async updateFinished(id: number, inProgress: boolean) {
+    await this.matchesModel.update({ inProgress }, { where: { id } });
+    const result = await this.matchesModel.findOne({ where: { id } });
     return result;
   }
 
-  async findOne(team: number): Promise<IMatch | null> {
+  async findOne(team: number) {
     const result = await this.matchesModel.findOne({ where: { id: team } });
     return result;
   }
 
-  async updateInProgress(id: number, inProgress: boolean, newData: IMatchScores)
-    : Promise<unknown | null> {
+  async updateInProgress(id: number, inProgress: boolean, newData: IMatchScores) {
     const { homeTeamGoals, awayTeamGoals } = newData;
     const result = await this.matchesModel
       .update({ homeTeamGoals, awayTeamGoals }, { where: { id, inProgress } });
+    return result;
+  }
+
+  async allFinishedMatches() {
+    const result = await this.matchesModel.findAll({ where: { inProgress: false } });
     return result;
   }
 }
