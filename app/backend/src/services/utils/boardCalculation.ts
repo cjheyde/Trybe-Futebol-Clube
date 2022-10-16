@@ -33,7 +33,6 @@ class BoardCalculation {
     const finalBoard: ILeaderboard[] = allTeams.map((team: ITeam) => {
       this.resetBoard();
       this.board.name = team.teamName;
-
       allFinishedMatches.forEach((match: IMatch) => {
         if (param === '/home' && team.id === match.homeTeam) {
           this.homeBoardCalculation(match);
@@ -41,6 +40,8 @@ class BoardCalculation {
         if (param === '/away' && team.id === match.awayTeam) {
           this.awayBoardCalculation(match);
         }
+        if (team.id === match.homeTeam) { this.homeBoardCalculation(match); }
+        if (team.id === match.awayTeam) { this.awayBoardCalculation(match); }
       });
       return { ...this.board };
     });
