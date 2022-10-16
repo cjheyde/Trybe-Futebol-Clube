@@ -10,7 +10,6 @@ class LeaderboardController {
     if (setBoard === '/') {
       setBoard = 'all';
     }
-    // console.log('setboard', setBoard);
     const boardData = await this.leaderboardService.getLeaderboard(setBoard);
     return res.status(StatusCodes.OK).json(
       boardData

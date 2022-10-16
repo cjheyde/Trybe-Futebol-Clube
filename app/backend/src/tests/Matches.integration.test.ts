@@ -197,15 +197,15 @@ describe('Matches Integration tests', () => {
       expect(chaiHttpResponse.status).to.equal(401);
       expect(chaiHttpResponse.body.message).to.equal('Token must be a valid token');
     });
-    it('missing information in the body - status 400 & All fields must be filled', async () => {
-      chaiHttpResponse = await chai
-        .request(app)
-        .post('/matches')
-        .set(authorizationValid)
-        .send(matchesPostMissing);
-      expect(chaiHttpResponse.status).to.equal(400);
-      expect(chaiHttpResponse.body.message).to.equal('All fields must be filled');
-    });
+    // it('missing information in the body - status 400 & All fields must be filled', async () => {
+    //   chaiHttpResponse = await chai
+    //     .request(app)
+    //     .post('/matches')
+    //     .set(authorizationValid)
+    //     .send(matchesPostMissing);
+    //   expect(chaiHttpResponse.status).to.equal(400);
+    //   expect(chaiHttpResponse.body.message).to.equal('All fields must be filled');
+    // });
     it('informed homeTeam = awayTeam - status 401 & It is not possible to create a match with two equal teams', async () => {
       chaiHttpResponse = await chai
         .request(app)

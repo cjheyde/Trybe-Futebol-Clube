@@ -14,7 +14,6 @@ await queryInterface.createTable('users', {
         type: Sequelize.STRING(30),
       },
       role: {
-        // allowNull: false,
         type: Sequelize.STRING(50),
       },
       email: {

@@ -17,11 +17,9 @@ User.init({
     type: INTEGER,
   },
   username: {
-    // allowNull: false,
     type: STRING(30),
   },
   role: {
-    // allowNull: false,
     type: STRING(50),
   },
   email: {
