@@ -49,6 +49,12 @@ class MatchesService {
       .update({ homeTeamGoals, awayTeamGoals }, { where: { id, inProgress } });
     return result;
   }
+
+  async findAllFinished() {
+    const result = await this.matchesModel.findAll({
+      where: { inProgress: false } });
+    return result;
+  }
 }
 
 export default MatchesService;
