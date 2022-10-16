@@ -34,14 +34,12 @@ class BoardCalculation {
       this.resetBoard();
       this.board.name = team.teamName;
       allFinishedMatches.forEach((match: IMatch) => {
-        if (param === '/home' && team.id === match.homeTeam) {
+        if (param !== '/away' && team.id === match.homeTeam) {
           this.homeBoardCalculation(match);
         }
-        if (param === '/away' && team.id === match.awayTeam) {
+        if (param !== '/home' && team.id === match.awayTeam) {
           this.awayBoardCalculation(match);
         }
-        if (team.id === match.homeTeam) { this.homeBoardCalculation(match); }
-        if (team.id === match.awayTeam) { this.awayBoardCalculation(match); }
       });
       return { ...this.board };
     });

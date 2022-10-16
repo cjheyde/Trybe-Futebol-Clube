@@ -10,12 +10,12 @@ const leaderboardService = new LeaderboardService(Team, Match);
 const leaderboardController = new LeaderboardController(leaderboardService);
 
 leaderboardRoute
-  .get('/', (req, res) => leaderboardController.getLeaderboard(req, res));
-
-leaderboardRoute
   .get('/home', (req, res) => leaderboardController.getLeaderboard(req, res));
 
 leaderboardRoute
   .get('/away', (req, res) => leaderboardController.getLeaderboard(req, res));
+
+leaderboardRoute
+  .get('/', (req, res) => leaderboardController.getLeaderboard(req, res));
 
 export default leaderboardRoute;

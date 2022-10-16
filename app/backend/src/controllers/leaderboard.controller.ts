@@ -6,7 +6,10 @@ class LeaderboardController {
   constructor(private leaderboardService: LeaderboardService) { }
 
   async getLeaderboard(req: Request, res: Response) {
-    const setBoard = req.path;
+    let setBoard = req.path;
+    if (setBoard === '/') {
+      setBoard = 'all';
+    }
     // console.log('setboard', setBoard);
     const boardData = await this.leaderboardService.getLeaderboard(setBoard);
     return res.status(StatusCodes.OK).json(
