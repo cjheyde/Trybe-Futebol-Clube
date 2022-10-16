@@ -9,10 +9,10 @@ class LeaderboardService {
     private matchesModel: typeof Match,
   ) { }
 
-  async getHomeLeaderboard() {
+  async getLeaderboard(param: string) {
     const allTeams = await this.teamsModel.findAll();
     const allFinishedMatches = await this.matchesModel.findAll({ where: { inProgress: false } });
-    const boardData = this.calc.getBoard(allTeams, allFinishedMatches);
+    const boardData = this.calc.getBoard(param, allTeams, allFinishedMatches);
     return boardData;
   }
 }

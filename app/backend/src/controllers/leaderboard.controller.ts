@@ -5,8 +5,13 @@ import LeaderboardService from '../services/leaderboard.service';
 class LeaderboardController {
   constructor(private leaderboardService: LeaderboardService) { }
 
-  async getHomeLeaderboard(req: Request, res: Response) {
-    const boardData = await this.leaderboardService.getHomeLeaderboard();
+  async getLeaderboard(req: Request, res: Response) {
+    const setBoard = req.path;
+    console.log('setboard', setBoard);
+    // if (setBoard === '') {
+    //   const boardData = await this.leaderboardService.getLeaderboard('home');
+    // }
+    const boardData = await this.leaderboardService.getLeaderboard(setBoard);
     return res.status(StatusCodes.OK).json(
       boardData
         .sort((a, b) => b.totalPoints - a.totalPoints
