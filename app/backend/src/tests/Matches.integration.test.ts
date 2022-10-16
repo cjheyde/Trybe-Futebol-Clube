@@ -78,11 +78,11 @@ const matchesPostResult = {
 }
 
 const authorizationValid = {
-  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9.XrQ12-O_jYIpGZPBrqo89ovNDI00KCLq4akcUHeqH-c"
+  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1ODk1MzE1LCJleHAiOjE2NjY0MTM3MTV9.vk0VkJaNqZc0bQ-xD3e8bsPgeMDnCtEYIYjsGRBmSbQ"
 }
 
 const authorizationInvalid = {
-  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9"
+  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1ODk1MzE1LCJleHAiOjE2NjY0MTM3MTV9.vk0VkJaNqZc0bQ-xD3e8bsPgeMDnCtEYIYjs"
 }
 
 const matchesPostMissing = {
@@ -248,6 +248,31 @@ describe('Matches Integration tests', () => {
       expect(chaiHttpResponse.body).to.be.an('object');
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body.message).to.equal('Finished');
+    });
+  });
+    describe('/matches/:id/finish - PATCH is successfully done', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub(Match, "update")
+        .resolves();
+    });
+
+    after(() => {
+      sinon.restore();
+    });
+
+    it('status 200', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .patch('/matches/41')
+        .set(authorizationValid)
+        .send();
+      expect(chaiHttpResponse.status).to.equal(200);
+      expect(chaiHttpResponse.body).to.be.an('object');
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body.message).to.equal('Match scores updated!');
     });
   });
 });

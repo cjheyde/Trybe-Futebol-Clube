@@ -13,23 +13,67 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Leaderboard Integration tests', () => {
+  describe('/leaderboard/home - GET is successfully done', () => {
     let chaiHttpResponse: Response;
 
     before(async () => {
       sinon
-        .stub(User, "findOne")
+        .stub()
         .resolves();
     });
 
-    after(()=>{
+    after(() => {
       sinon.restore();
     });
 
-    it('status 400', async () => {
+    it('status 200', async () => {
       chaiHttpResponse = await chai
         .request(app)
-        .post('/leaderboard')
+        .get('/leaderboard/home')
         .send();
-      expect(chaiHttpResponse.status).to.equal(400);
+      expect(chaiHttpResponse.status).to.equal(200);
     });
   });
+  describe('/leaderboard/away - GET is successfully done', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub()
+        .resolves();
+    });
+
+    after(() => {
+      sinon.restore();
+    });
+
+    it('status 200', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .get('/leaderboard/away')
+        .send();
+      expect(chaiHttpResponse.status).to.equal(200);
+    });
+  });
+  describe('/leaderboard - GET is successfully done', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub()
+        .resolves();
+    });
+
+    after(() => {
+      sinon.restore();
+    });
+
+    it('status 200', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .get('/leaderboard')
+        .send();
+      expect(chaiHttpResponse.status).to.equal(200);
+    });
+  });
+});

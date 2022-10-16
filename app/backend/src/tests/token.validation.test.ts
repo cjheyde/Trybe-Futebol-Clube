@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 const authorizationValid = {
-  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1MDMwMzkyLCJleHAiOjE2NjU1NDg3OTJ9.XrQ12-O_jYIpGZPBrqo89ovNDI00KCLq4akcUHeqH-c"
+  authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjY1ODk1MzE1LCJleHAiOjE2NjY0MTM3MTV9.vk0VkJaNqZc0bQ-xD3e8bsPgeMDnCtEYIYjsGRBmSbQ"
 }
 
 const authorizationInvalid = {
