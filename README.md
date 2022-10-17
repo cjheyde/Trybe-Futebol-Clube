@@ -1,4 +1,4 @@
-# Trybe Futebol Cube (Soccer Club)
+# Trybe Futebol Cube (Soccer Club) ⚽
 
 This Project shows a leaderboard of all soccer teams in a competition, and lets you add teams, matches, and scores.
 
@@ -34,7 +34,7 @@ Open frontend on http://localhost:3000/login <br />
 Here you find a list of files and or folders according to the ownership.
 
 <details>
- <summary><strong> I coded myself:</strong></summary><br />
+ <summary><strong>🙋‍♀️ I coded myself:</strong></summary><br />
    
   ```markdown  
   app/
@@ -61,7 +61,7 @@ Here you find a list of files and or folders according to the ownership.
 
 
 <details>
- <summary><strong> I coded partially - the scholl has coded some of it:</strong></summary><br />
+ <summary><strong>🧑‍🤝‍🧑 I coded partially - the scholl has coded some of it:</strong></summary><br />
  
  ```markdown   
   app/
@@ -74,7 +74,7 @@ Here you find a list of files and or folders according to the ownership.
 
 
 <details>
- <summary><strong> coded by a teacher or a teammate:</strong></summary><br />
+ <summary><strong>🧛 coded by a teacher or a teammate:</strong></summary><br />
    
  ```markdown  
   app/
@@ -88,7 +88,7 @@ Here you find a list of files and or folders according to the ownership.
  </details>
 
 <details>
- <summary><strong> coded by the school:</strong></summary><br />
+ <summary><strong>🏫 coded by the school:</strong></summary><br />
    
   ```markdown  
    all others not mentioned above.
