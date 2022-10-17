@@ -8,28 +8,32 @@ This is a fullstack JavaScript Project, but the frontend came already coded by t
 
 
 
-### How to run it:
+# How to run it:
 
-You need to have installed:
- - Unix based Operational System
- - node version >= 16.14.0 LTS
- - Docker
+<details>
+ <summary><strong> You need to have installed:</strong></summary><br />
+ - Unix based Operational System <br />
+ - node version >= 16.14.0 LTS <br />
+ - Docker <br />
  - Docker-compose version >= 1.29.2
+</details>
+ 
+command: `npm install` <br />
+Use Docker, command: `npm run compose:up`
 
-command: 
--> npm install 
-Use Docker, command:
-  -> npm run compose:up
-Open frontend on - http://localhost:3000/login
+Open frontend on http://localhost:3000/login <br />
+
   to login type:
-    login: admin@admin.com
-    senha(password): secret_admin
+*    login: admin@admin.com
+*    senha(password): secret_admin
 
+
+
+# Files/folders Ownership
 
 #### Files/folders I coded myself:
-app/
-  backend/
-    src/
+  
+    app/backend/src/ 
       controllers/
       database/
         migrations/ (except 99999999999999-create-z.js)
@@ -41,16 +45,19 @@ app/
       services/
       tests/
     Dockerfile
-  frontend/
+  
+  app/frontend/
     Dockerfile
     packages.npm
 README.md
+
 
 #### Files/folders I coded partially - the scholl has coded some of it:
 app/
   backend/
     src/
       app.ts
+
 
 #### Files/folders coded by a teacher or a teammate:
 app/
@@ -60,7 +67,9 @@ app/
     middlewares/
       error.middleware.ts -> ref. school classes material and project revision class code
 
+
 #### Files/folders coded by the school (@betrybe):
 all others not mentioned above.
 
-### 🚧 README under construction 🚧
+
+#### 🚧 README under construction 🚧
