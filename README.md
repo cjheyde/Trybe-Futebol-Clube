@@ -29,47 +29,71 @@ Open frontend on http://localhost:3000/login <br />
 
 
 
-# Files/folders Ownership
+# Files/Folders Ownership
 
-#### Files/folders I coded myself:
-  
-    app/backend/src/ 
-      controllers/
-      database/
-        migrations/ (except 99999999999999-create-z.js)
-        Models/ (except ExampleModel.ts & index.ts)
+Here you find a list of files and or folders according to the ownership.
+
+<details>
+ <summary><strong> I coded myself:</strong></summary><br />
+   
+  ```markdown  
+  app/
+    backend/
+      src/ 
+        controllers/
+        database/
+          migrations/ (except 99999999999999-create-z.js)
+          Models/ (except ExampleModel.ts & index.ts)
+        helpers/
+        interfaces/
+        middlewares/ (except error.middleware.ts)
+        routes/
+        services/
+        tests/
+      Dockerfile
+    frontend/
+      Dockerfile
+      packages.npm
+  README.md
+  ```
+ 
+ </details>
+
+
+<details>
+ <summary><strong> I coded partially - the scholl has coded some of it:</strong></summary><br />
+ 
+ ```markdown   
+  app/
+    backend/
+      src/
+        app.ts
+ ```
+ 
+ </details>
+
+
+<details>
+ <summary><strong> coded by a teacher or a teammate:</strong></summary><br />
+   
+ ```markdown  
+  app/
+    backend/
       helpers/
-      interfaces/
-      middlewares/ (except error.middleware.ts)
-      routes/
-      services/
-      tests/
-    Dockerfile
-  
-  app/frontend/
-    Dockerfile
-    packages.npm
-README.md
+        BcryptService.ts -> ref. school class code
+      middlewares/
+        error.middleware.ts -> ref. school classes material and project revision class code
+  ```
+ 
+ </details>
 
-
-#### Files/folders I coded partially - the scholl has coded some of it:
-app/
-  backend/
-    src/
-      app.ts
-
-
-#### Files/folders coded by a teacher or a teammate:
-app/
-  backend/
-    helpers/
-      BcryptService.ts -> ref. school class code
-    middlewares/
-      error.middleware.ts -> ref. school classes material and project revision class code
-
-
-#### Files/folders coded by the school (@betrybe):
-all others not mentioned above.
-
+<details>
+ <summary><strong> coded by the school:</strong></summary><br />
+   
+  ```markdown  
+   all others not mentioned above.
+  ```
+ 
+ </details>
 
 #### 🚧 README under construction 🚧
