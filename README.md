@@ -1,4 +1,4 @@
-# Trybe Futebol Clube - Trybe Soccer Club (free translation)
+# Trybe Futebol Cube (Soccer Club)
 
 This Project shows a leaderboard of all soccer teams in a competition, and lets you add teams, matches, and scores.
 
