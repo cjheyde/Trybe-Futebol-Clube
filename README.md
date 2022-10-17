@@ -7,20 +7,20 @@ Here I had to exercise: POO, TDD, Node.js, Express, Typescript, Sequelize, mySQL
 This is a fullstack JavaScript Project, but the front-End came already coded by the school (@betrybe).
 
 
-#### How to run it:
+### How to run it:
 
 Use Docker, follow commands:
   npm run compose:up
   
 
 
-### Files/folders I coded myself:
+#### Files/folders I coded myself:
 
 
-### Files/folders coded by a teacher or a teammate:
+#### Files/folders coded by a teacher or a teammate:
 
 
-### Files/folders coded by the school (@betrybe):
+#### Files/folders coded by the school (@betrybe):
 
 
-## 🚧 README under construction 🚧
+### 🚧 README under construction 🚧
