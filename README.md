@@ -95,5 +95,9 @@ Here you find a list of files and or folders according to the ownership.
   ```
  
  </details>
+ 
+ #
+
+✨ all icons used here are from:  [EmojiPedia](https://emojipedia.org/). 
 
 #### 🚧 README under construction 🚧
