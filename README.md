@@ -4,8 +4,9 @@ This Project shows a leaderboard of all soccer teams in a competition, and lets 
 
 Here I had to exercise: POO, TDD, Node.js, Express, Typescript, Sequelize, mySQL, docker.
 
-This is a fullstack JavaScript Project, but the frontend came already coded by the school [Trybe](https://www.betrybe.com/).
+This is a full-stack JavaScript Project, but the front-end came already coded by the school [Trybe](https://www.betrybe.com/).
 
+![Project Leaderboard Image](assets/Project-leaderboard.png)
 
 
 # How to run it:
@@ -15,15 +16,16 @@ This is a fullstack JavaScript Project, but the frontend came already coded by t
  - Unix based Operational System <br />
  - node version >= 16.14.0 LTS <br />
  - Docker <br />
- - Docker-compose version >= 1.29.2
+ - Docker-compose version >= 1.29.2 <br />
 </details>
  
+
 command: `npm install` <br />
 Use Docker, command: `npm run compose:up`
 
-Open frontend on http://localhost:3000/login <br />
+Open front-end on http://localhost:3000/login <br />
 
-  to login type:
+  login info:
 *    login: admin@admin.com
 *    senha(password): secret_admin
 
@@ -91,7 +93,7 @@ Here you find a list of files and or folders according to the ownership.
  <summary><strong>🏫 coded by the school:</strong></summary><br />
    
   ```markdown  
-   all others not mentioned above.
+   all others not mentioned before.
   ```
  
  </details>
