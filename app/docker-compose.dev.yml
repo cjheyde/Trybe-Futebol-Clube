@@ -31,8 +31,8 @@ services:
       - JWT_SECRET=jwt_secret
       # Os dados abaixo se referem ao container `db`
       # Dica: Relembre aqui da comunicação interna entre containers
-      - MYSQLUSER=process.env.MYSQLUSER
-      - MYSQLPASSWORD=process.env.MYSQLPASSWORD
+      - MYSQLUSER=root
+      - MYSQLPASSWORD=123456
       - MYSQLHOST=db
       - MYSQLPORT=3306
     healthcheck:
